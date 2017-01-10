@@ -1,0 +1,343 @@
+{% load staticfiles %}
+<!--DOCTYPE html -->
+<html>
+<head>
+
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block head_title %} eElectronics! {% endblock head_title %}</title>
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href='{% static "css/owl.carousel.css" %}'>
+    <link rel="stylesheet" href='{% static "css/style.css" %}'>
+    <link rel="stylesheet" href='{% static "css/responsive.css" %}'>
+   
+<style>
+{% block style %}{% endblock style %}
+</style>
+
+{% block head_extra %} {% endblock head_extra %}
+</head>
+<body>
+    <!-- start: Header -->
+        <!--nav class="navbar navbar-default header navbar-fixed-top">
+          <div class="col-md-12 nav-wrapper">
+            <div class="navbar-header" style="width:100%;">
+              <div class="opener-left-menu is-open">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+              </div>
+                <a href='{% url "posts:list" %}'class="navbar-brand">
+                 <b style="color:#0099FF;">RECOMMENDER SYSTEM</b>
+                </a>
+            </div>
+          </div>
+        </nav -->
+
+      <div class="header-area">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-md-8">
+                          <div class="user-menu">
+                              <ul>
+                                  {% if not request.user.is_authenticated %}
+                                    <li><a href='{% url "login" %}'><i class="fa fa-user"></i> Login </a></li>
+                                    <li><a href='{% url "register" %}'><i class="fa fa-user"></i> Register</a></li>
+                                   {% else %}
+                                  <li><a href='{% url "logout" %}'><i class="fa fa-user"></i> Logout </a></li>
+                                  <li><a href='{% url "posts:list" %}'><i class="fa fa-heart" ></i> Likes </a></li>
+                                  {% endif %}
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div> 
+
+       <div class="site-branding-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="logo">
+                        <h1><a href="#">e<span>Electronics</span></a></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div> <!-- End site branding area -->
+
+
+      <!-- div class="container-fluid mimin-wrapper">
+
+         
+            <!--div id="left-menu">
+              <div class="sub-left-menu scroll">
+                <ul class="nav nav-list">
+                    <li><div class="left-bg"></div></li>
+                    <li class="time">
+                      <h1 class="animated fadeInLeft">21:00</h1>
+                      <p class="animated fadeInRight">Sat,October 1st 2029</p>
+                    </li>
+                    <ol class = "ripple" >
+                        {% if not request.user.is_authenticated %}
+
+
+                            <button  style="margin-top:0px !important;" class="btn-flip btn btn-3d btn-danger" onclick=location.href='{% url "login" %}'>Login</button>
+                            <p></br></p>
+                            <button  style="margin-top:0px !important;" class="btn-flip btn btn-3d btn-danger" onclick=location.href='{% url "register" %}'>Register</button>
+
+                        {% else %}
+
+                            <b style="font-size:25px"> Hello {{ user.username}}! </b>
+
+
+                           
+                            <button  style="margin-top:0px !important;" class="btn-flip btn btn-3d btn-danger" onclick=location.href='{% url "logout" %}'>Logout</button>
+                            <p></br></p>
+                            <button  style="margin-top:0px !important;" class="btn-flip btn btn-3d btn-danger" onclick=location.href='{% url "posts:list" %}'>Likes</button>
+
+
+                        {% endif %}
+
+                  </ol>
+                  </ul>
+                </div>
+            </div >
+>
+     </div -->
+
+
+       <div class="mainmenu-area">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div> 
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href='{% url "posts:list" %}'>Home</a></li>
+                        <li><a href="#go">Contact</a></li>
+                    </ul>
+                </div>  
+            </div>
+        </div>
+    </div> <!-- End mainmenu area -->
+    
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+
+
+
+
+
+{% include "messages_display.html" %}
+<div class='container'>
+    
+    <ol class='breadcrumb'>
+        <!--li><a href='{% url "posts:list" %}'>Home</a></li-->
+        {% block post_detail_link %}
+        {% endblock %}
+
+    </ol>
+
+</div>
+
+{% block content %}{% endblock content %}
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script   src="http://code.jquery.com/jquery-1.12.2.min.js"   integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk="   crossorigin="anonymous"></script>
+
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script src='//cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js'></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".content-markdown").each(function(){
+            var content = $(this).text()
+            var markedContent = marked(content)
+            $(this).html(markedContent)
+    })
+    $(".post-detail-item img").each(function(){
+            $(this).addClass("img-responsive");
+    })
+
+
+
+    var contentInput = $("#id_content");
+
+    function setContent(value){
+        var markedContent = marked(value)
+        $("#preview-content").html(markedContent)
+        $("#preview-content img").each(function(){
+            $(this).addClass("img-responsive")
+        })
+    }
+    setContent(contentInput.val())
+
+    contentInput.keyup(function(){
+        var newContent = $(this).val()
+        setContent(newContent)
+    })
+
+    var titleInput = $("#id_title");
+
+
+
+    function setTitle(value) {
+        $("#preview-title").text(value)
+    }
+    setTitle(titleInput.val())
+
+    titleInput.keyup(function(){
+        var newContent = $(this).val()
+        setTitle(newContent)
+    })
+
+    $(".comment-reply-btn").click(function(event){
+        event.preventDefault();
+        $(this).parent().next(".comment-reply").fadeToggle();
+    })
+
+
+    // preview-title
+    // preview-content
+
+})
+
+</script>
+
+<!-- start: Javascript -->
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/jquery.ui.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery.min.js"></script>
+    
+    <!-- Bootstrap JS form CDN -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
+    <!-- jQuery sticky menu -->
+    <script src="/static/js/owl.carousel.min.js"></script>
+    <script src="/static/js/jquery.sticky.js"></script>
+    
+    <!-- jQuery easing -->
+    <script src="/static/js/jquery.easing.1.3.min.js"></script>
+    
+    <!-- Main Script -->
+    <script src="/static/js/main.js"></script>
+
+
+
+
+
+
+<!-- custom -->
+<script src="/static/js/main.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  var $container = $('.masonry-container');
+    $container.imagesLoaded( function () {
+      $container.masonry({
+        columnWidth: '.item',
+        columnWidth: 100,
+        itemSelector: '.item'
+      });
+    });
+
+    $('a[data-toggle=tab]').each(function () {
+      var $this = $(this);
+
+      $this.on('shown.bs.tab', function () {
+
+        $container.imagesLoaded( function () {
+          $container.masonry({
+            columnWidth: '.item',
+            itemSelector: '.item'
+          });
+        });
+
+      });
+    });
+});
+</script>
+<!-- end: Javascript -->
+
+
+
+
+    <div class="footer-top-area" id='go'>
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-about-us">
+                        <h2>e<span>Electronics</span></h2>
+                        <p>
+                          eElectronics is a review based community for electronics goods! , Together we will give best possible suggestion to user before buying any gadgets.
+                          Come join us and help us grow!.
+                          <br>
+                          DBMS Project Work
+                          <br>
+                          Jamia Millia Islamia
+                        </p>
+                        <div class="footer-social">
+                            <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+                            <a href="#" target="_blank"><i class="fa fa-youtube"></i></a>
+                            <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+                            <a href="#" target="_blank"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-newsletter">
+                            <h2 class="footer-wid-title">Contacts</h2>
+                            <p>mail us at mail@harshvijay.me</p>
+                            <b>Team Members :</b>
+                            <li> Harsh Vijay</li>
+                            <li> Iram Ayyub</li>
+                            <li> Rohit Kumar Wasan</li>
+                  </div>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div> <!-- End footer top area -->
+
+</body>
+</html>

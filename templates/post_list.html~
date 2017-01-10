@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+    <h1>{{ title }}</h1>
+<form method='GET' action='' class='row'>
+        <div id = "content" class = "search-v1">
+        <div class='panel'>
+        <div class='panel-body'>
+        <div class='col-md-12'>
+            <div class='input-group'>
+                <input class='form-control' type='text'  name='q' placeholder='Search by Keywords or titles' value='{{ request.GET.q }}'/>
+                <span class='input-group-btn'>
+
+                    <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
+                    <button class='btn btn-default' style="font-size : 12px" type='submit'>Search <i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+</form>
+
+
+
+
+
+
+
+
+<h1></br><h1>
+{% for obj in object_list %}
+<div class="row">
+  <div class="col-sm-12">
+    <div class="thumbnail">
+        {% if obj.image %}
+         <img src='{{ obj.image.url }}' class='img-responsive' />
+        {% endif %}
+      <div class="well">
+        {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+        <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+        
+        <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
+      </div>
+    </div>
+  </div>
+<hr/>
+</div>
+{% endfor %}
+
+
+<div class="pull-right"  role="group" aria-label="..." style="margin-top:20px;">
+    <span class = "this-page" ></span>
+        {% if object_list.has_previous %}
+            <a class =" btn btn-round btn-primary" href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">PREVIOUS</a>
+        {% endif %}
+
+        <button type="button" class="btn btn-round btn-default" style="font-size:15px;">{{ object_list.number }}</button>
+
+        {% if object_list.has_next %}
+            <a class =" btn btn-round btn-primary" href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">NEXT</a>
+        {% endif %}
+    
+</div>
+
+
+
+
+<!--div class="pagination">
+    <span class = "this-page" ></span>
+        {% if object_list.has_previous %}
+            <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+        {% endif %}
+
+        <span class="this-page" style = "color:white;">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">NEXT</a>
+        {% endif %}
+    
+</div-->
+
+
+
+
+
+
+{% endblock content %}
